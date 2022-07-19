@@ -517,34 +517,34 @@ elif(userInputMonth == "12"):
 else:
     print("invalid number")
 
-def http_status(status):
-  match status:
-    case 1:
-      return "Garnet\nPeople born in January are bold and alert"
-    case 2:
-      return "Amethyst\nPeople born in February are lucky and loyal"
-    case 3:
-      return "Aquamarine\nPeople born in March are naughty and gentle"
-    case 4:
-      return "Diamond\nPeople born in April are caring and strong"
-    case 5:
-      return "Emarld\nPeople born in May are kucky and practical"
-    case 6:
-      return "Alexandrite\nPeople born in June are romantic and curious"
-    case 7:
-      return "Ruby\nPeople born in July are adventurous and honest"
-    case 8:
-      return "Peridot\nPeople born in August are active and hardworking"
-    case 9:
-      return "Sapphire\nPeople born in September are romantic and pretty"
-    case 10:
-      return "Toumaline\nPeople born in October are stylish and friendly"
-    case 11:
-      return "Citrine\nPeople born in November are nice and creative"
-    case 12:
-      return "Zircon\nPeople born in December are nice and creative"
+
+match (userInputMonth):
+    case '1':
+      print( "Garnet\nPeople born in January are bold and alert")
+    case '2':
+      print( "Amethyst\nPeople born in February are lucky and loyal")
+    case '3':
+      print( "Aquamarine\nPeople born in March are naughty and gentle")
+    case '4':
+      print("Diamond\nPeople born in April are caring and strong")
+    case '5':
+      print("Emarld\nPeople born in May are kucky and practical")
+    case '6':
+      print( "Alexandrite\nPeople born in June are romantic and curious")
+    case '7':
+      print( "Ruby\nPeople born in July are adventurous and honest")
+    case '8':
+      print("Peridot\nPeople born in August are active and hardworking")
+    case '9':
+      print("Sapphire\nPeople born in September are romantic and pretty")
+    case '10':
+      print("Toumaline\nPeople born in October are stylish and friendly")
+    case '11':
+      print("Citrine\nPeople born in November are nice and creative")
+    case '12':
+      print("Zircon\nPeople born in December are nice and creative")
     case _:
-      return "Unknown error occured"
+      print("Unknown error occured")
   
 
 
