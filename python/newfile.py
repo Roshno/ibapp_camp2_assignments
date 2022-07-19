@@ -3,6 +3,7 @@ import sys
 from tkinter import SE
 from tkinter.ttk import Separator 
 
+
 print ("hello world")
 #JUST PRINTING THE PYTHON VERSION
 """just a
@@ -269,3 +270,4 @@ string = 'They ate 6 apples and 10 bananas'
 string = re.sub('6', 'six', string)
 string = re.sub('10', 'ten', string)
 print (string)
+List = [1,2]
