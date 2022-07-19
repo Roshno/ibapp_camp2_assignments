@@ -475,7 +475,7 @@ def http_status(status):
       return "Unknown error occured"
 #calling the function inside print statement
 print(http_status(404))
-"""
+
 
 userInputMonth = input('Enter DOB month number:')
 if(userInputMonth == "1"):
@@ -546,6 +546,73 @@ match (userInputMonth):
     case _:
       print("Unknown error occured")
   
+
+#looping in python
+#FOR loop to loop/iterate through a list in python
+fruits = ['apples','oranges','banana','cherry']
+for fruit in fruits:
+  print (fruit)
+
+#to display index using the enumerate method
+for index, fruit in enumerate(fruits):
+  print(index,fruit)
+
+#tuse for loop to generate a series of numbers
+#using the range function
+for i in range(10):
+  print(i)
+
+#WHILE loop
+counter = 5
+while counter > 0:
+  print ("Counter =", counter)
+  counter = counter - 1
+
+#break and continue statements
+#break example
+j = 0
+for i in range(10):
+  j= j +2
+  print('i = ', i,'j = ', j)
+  if j ==6:
+    break
+  print()
+
+#continue example
+j = 0
+for i in range(10):
+  j= j +2
+  print('i = ', i,'j = ', j)
+  if j ==6:
+    continue
+  print('continue j value is:',j)
+
+#try except statement (similar to try catch) in python
+try:
+  answer = 12/0
+  print(answer)
+except:
+  print("Some friendly error message")
+
+"""
+#print list of numbers multiples of 5 and divisible by 8
+start = int(2000)
+end = int(2500)
+count = start
+while count <= end:
+    if count % 5 == 0 and count % 8 == 0:
+        print(count, " is divisible by 5 and 8.")
+    count = count + 1 
+
+
+
+#print multilication tables
+num = int(input("Enter number"))
+for i in range(1,11):
+  print(num, 'x',i,'=',num*i)
+          
+
+
 
 
 
