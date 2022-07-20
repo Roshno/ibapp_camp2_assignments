@@ -1,10 +1,10 @@
-
+"""
 import sys
 from tkinter import SE
 from tkinter.tix import DisplayStyle
 from tkinter.ttk import Separator 
 
-"""
+
 print ("hello world")
 #JUST PRINTING THE PYTHON VERSION
 just a
@@ -594,7 +594,7 @@ try:
 except:
   print("Some friendly error message")
 
-"""
+
 #print list of numbers multiples of 5 and divisible by 8
 start = int(2000)
 end = int(2500)
@@ -604,13 +604,213 @@ while count <= end:
         print(count, " is divisible by 5 and 8.")
     count = count + 1 
 
-
-
 #print multilication tables
 num = int(input("Enter number"))
 for i in range(1,11):
   print(num, 'x',i,'=',num*i)
           
+
+#functions in python
+def findSum(a,b):
+  sum = a + b
+  return sum
+print(findSum(2,3))
+
+#define the function
+def checkIfPrime(numberToCheck):
+  for x in range(2,numberToCheck):
+    if(numberToCheck % x == 0):
+      return False
+  return True
+print(checkIfPrime(5))
+print(checkIfPrime(15))
+
+#function returning multiple values
+def calculations(a,b):
+  add = a + b
+  sub = a - b
+  mul = a * b
+  div = a % b 
+  return(add,sub,mul,div)
+#calling the function
+output = calculations(40,30)
+print("Add result",output[0])
+print("Sub result",output[1])
+print("Mul result",output[2])
+print("Div result",output[3])
+
+#generator is a function that returns an iterator
+#iterator is something that we can loop through using a looping statement
+def calculationsyield(a,b):
+  add = a + b
+  yield add
+  sub = a - b
+  yield sub
+  mul = a * b
+  yield mul
+  div = a % b 
+  yield div
+
+#using a for loop we can loop through the returned value from the function
+for value in calculationsyield(30,40):
+  print (value)
+
+
+#Demonstrating the variables scope
+#Declaring a global variable
+message1 = "Just a global variable"
+
+def myFunction():
+  global message1 #enable modification of global variable inside the function
+  print("Reached inside function")
+  print(message1) #printing the global variable
+  message2 = "Its a local variable" #declaring local variable
+  print(message2)
+  message1 = "Just modifying the global variable"
+  print(message1) #printing the global variable
+
+myFunction() #calling the function
+#print(message1)
+#print(message2)
+
+#demonstrate an arbitary list of arguments into the function
+def make_pizza(size, *toppings): #arbitrary list parameter is prefixed by *
+  print(f"\nMaking a {size} -inch pizza with following toppings:")
+  for topping in toppings:
+    print(f"\n{topping}")
+
+make_pizza(12,"pepperoni")
+make_pizza(16,"mushroom","green pepper")
+
+def printinfo(name, age):
+  print("Name: ", name)
+  print("Age: ", age)
+  
+#calling with required arguments
+printinfo("Tom", 17)
+#calling with keyword arguments
+printinfo(age=17, name ="Minnie")
+
+#Anonymous Functions
+#LAMBDA
+
+sum = lambda num1, num2: num1 + num2
+#calling the lambda function
+print("sum of two numbers ",sum(2,3))
+
+
+#python modules
+#importing a module
+import random
+#calling function inside the module
+print(random.randrange(1,10))
+
+import random as r
+#calling function inside the module
+print(r.randrange(1,10))
+
+from random import randint, randrange
+print(randrange(1,10))
+
+#random built in module
+import random
+print(random.random())
+print(random.randint(5,20))
+print(random.choice(["head", "tail"]))
+myShirtColors = ["blue","red","black","yellow","green"]
+random.shuffle(myShirtColors)
+print(myShirtColors)
+
+random.seed(10)
+print(random.random())
+random.seed(11)
+print(random.random())
+
+#python date time module
+import time
+print(time.time()) #seconds past 1st Jan 1970
+print(time.localtime(time.time())) #get the multiple time valus as a tuple
+print(time.asctime(time.localtime(time.time())))
+
+for i in range(0,10):
+  print(i)
+  time.sleep(1) #delay program executio by the specified number of seconds
+
+
+import datetime
+print(datetime.datetime.now()) #return the current date time object
+
+#creating custom datetime object
+birthDay = datetime.datetime(2022,7,20)
+print(birthDay)
+birthDay = datetime.datetime(2022,7,20,10,15,50)
+print(birthDay)
+
+#time comparison demo
+from datetime import datetime as dt
+
+if dt(dt.now().year,dt.now().month,dt.now().day,9)< dt.now()<dt(dt.now().year,dt.now().month,dt.now().day,18):
+    print("Working now")
+else:
+    print("Shift completed")
+
+import calendar
+myCalendar = calendar.month(2022,7) #get calendar for a month
+print(myCalendar)
+myCalendar = calendar.prcal(2022) #get calendar for a year
+print(myCalendar)
+
+import math
+#finding the exponential of a number, then its absolute, then its log, then
+#convert to the base of 10
+number = 2e-7 
+print(math.log(math.fabs(number),10))
+
+number = math.pow(4,2) #4 to the power of 2
+print(number)
+number = math.floor(4.2) #round to the smallest digit
+print(number)
+number = math.ceil(4.2) #round to the next digit
+print(number)
+number = math.fabs(-10) #return absolute value
+print(number)
+number = math.factorial(10) #return factorial
+print(number)
+number = math.modf(3.14) #return int anf fractional part
+print(number)
+
+
+#calling the custom module created
+import prime
+answer = prime.checkIfPrime(10)
+print(answer)
+"""
+
+
+
+
+
+def calculateGstShare(price, rate):
+    return price * (rate / 2) / 100
+def printGstDetails():
+    SGST = CGST = calculateGstShare(price, rate)
+    print("Actual price of the item :", price)
+    print("Price after applying CGST :", CGST)
+    print("Price after applying SGST :", SGST)
+    print("Total price with GST :", price + CGST + SGST)
+price = float(input("Price before GST : "))
+rate = float(input("GST rate : "))
+
+printGstDetails()
+
+
+
+
+
+
+
+
+
 
 
 
