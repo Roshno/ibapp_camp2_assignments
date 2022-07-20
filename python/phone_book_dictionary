@@ -1,0 +1,98 @@
+#define function to welcome user
+def phone_book_welcome():
+        entry = int(input('''1. List all contacts, 
+        2. Add a new contact, 
+        3. Delete a contact,
+        4. Search by name, 
+        5. Search by number
+        Enter your entry here'''))
+
+        return entry
+
+#define function phone_book
+def phone_book():
+    numbers = {} #initiate empty numbers dictionary to store values
+
+    while True: #initiate while loop to continuously run program
+        entry = phone_book_welcome()
+        if entry == 1:
+            if bool(numbers) != False:
+                for k,v in numbers.items():
+                    print(k,'-',v)
+            else:
+                print('You have an empty phone book. Add a new contact by going back to menu')
+        elif entry == 2:
+            phone_number = input('Please enter phone number:')
+            contact_name = input('Please give contact name: ')
+            if phone_number not in numbers.items():
+                numbers.update({contact_name : phone_number})
+                print('Contact saved successfully')
+            else:
+                print('This contact alredy exists in your phone book.')
+        elif entry == 3:
+            name = input('Enter the name of contact you wish to delete:')
+            if name in numbers:
+                print('The contact name is',numbers[name])
+            else:
+                print('the contact does not exist.')
+            del numbers[name]
+        elif entry == 4:
+            name = input('Enter the name of contact you wish to delete:')
+            if numbers.get(name):
+                print(numbers[name])
+            else:
+                print("The contact does not exist.")
+        elif entry == 5:
+            number = input('Enter the number of contact:')
+            for k,v in numbers.items():
+                if number ==v:
+                    print(k)
+        
+phone_book()
+
+
+
+
+
+
+
+
+"""
+book_menu_choice = 0
+phone_book()
+while book_menu_choice != 5:
+    book_menu_choice = int(input("Type in a number (1-5): "))
+    if book_menu_choice == 1:
+        print("List all contacts")
+        for x in numbers.keys():
+            print("Name: ", x, "\tNumber:", numbers[x])
+        print()
+    elif book_menu_choice == 2:
+        print("Add a new contact")
+        name = input("Name: ")
+        phone = input("Number: ")
+        numbers[name] = phone
+    elif book_menu_choice == 3:
+        print("Delete a contact")
+        name = input("Name: ")
+        if name in numbers:
+            del numbers[name]
+        else:
+            print(name, "was not found")
+    elif book_menu_choice == 4:
+        print("Search by name")
+        name = input("Name: ")
+        if name in numbers:
+            print("The number is", numbers[name])
+        else:
+            print(name, "was not found")
+    elif book_menu_choice == 5:
+        print("Search by number")
+        numbers = input("Number: ")
+        if number in numbers:
+            print("The number is",name[numbers])
+        else:
+            print(numbers, "was not found")
+"""
+
+
