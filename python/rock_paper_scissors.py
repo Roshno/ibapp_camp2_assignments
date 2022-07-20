@@ -1,7 +1,7 @@
 
 import random
 actors = ['Rock', 'Paper', 'Scissor']
-c, cp, cpup = 0, 0, 0
+c, csp, cspup = 0, 0, 0
 while c <5:
     ch = input("\nRock, Paper, Scissor ? : ")
     cpu = random.choice(actors)
@@ -10,13 +10,13 @@ while c <5:
         c = c + 1
     else:
         if (ch == 'Rock' and cpu == 'Paper') or (ch == 'Paper' and cpu == 'Scissor') or (ch == 'Scissor' and cpu == 'Rock'):
-            cpup = cpup + 1
+            cspup = cspup + 1
         else:
-            cp = cp + 1
+            csp = csp + 1
         c = c + 1
-if cp > cpup:
-    print("\nThe winner is user(%d - %d)" %(cp, cpup))
-elif cp < cpup:
-    print("\nThe winner is cpu (%d - %d)" %(cpup, cp))
+if csp > cspup:
+    print("\nUser is the winner(%d - %d)" %(csp, cspup))
+elif csp < cspup:
+    print("\nCPU is the winner (%d - %d)" %(cspup, csp))
 else:
-    print("\nTie game !")
+    print("\nGame is Tie !")
