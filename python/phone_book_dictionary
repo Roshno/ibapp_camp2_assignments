@@ -16,6 +16,7 @@ def phone_book():
     while True: #initiate while loop to continuously run program
         entry = phone_book_welcome()
         if entry == 1:
+            #check if numbers is empty, if not empty print current contact list
             if bool(numbers) != False:
                 for k,v in numbers.items():
                     print(k,'-',v)
@@ -37,7 +38,7 @@ def phone_book():
                 print('the contact does not exist.')
             del numbers[name]
         elif entry == 4:
-            name = input('Enter the name of contact you wish to delete:')
+            name = input('Enter the name of contact you wish to find:')
             if numbers.get(name):
                 print(numbers[name])
             else:
