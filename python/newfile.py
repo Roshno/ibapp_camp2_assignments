@@ -784,24 +784,142 @@ print(number)
 import prime
 answer = prime.checkIfPrime(10)
 print(answer)
+
+
+
+
+#rights of a function in python
+#is similar to the rights of a variable
+#1 we can assign a function to a variable
+import re
+
+
+def myFunc1():
+  print("This is my function 1")
+
+#assign the function to a variable
+myMyFunction = myFunc1
+
+myFunc1() #call function directly
+myMyFunction() #CALL THE FUNCTION VIA THE VARIABLE
+
+#2 we can pass a function as an argument into another function
+def myFunc2(receivedFn):
+  receivedFn()
+  receivedFn()
+
+myFunc2(myFunc1)
+  
+#3 we can return a function from another function
+def returnToUpperFn():
+  return str.upper
+
+upperRef = returnToUpperFn()
+print(upperRef("hello world"))
+
+#4 we can define a function inside another function
+def outer():
+  print("outer function")
+
+  def firstInner():
+    print("first inner function")
+
+  def secondInner():
+    print("second inner function")
+
+  firstInner()
+  secondInner()
+
+outer()
+
+#5 inner functions can access variables in the enclosing function
+def myOuter(myGreeting):
+  print("The outer function says ",myGreeting)
+
+  def myfirstInnerFunc():
+    print("The first inner function says ",myGreeting)
+  
+  return myfirstInnerFunc
+
+myOuterFunVariable = myOuter("Peace to the world")
+myOuterFunVariable()
+
+
+#21-07-2020
+
+#python decorator
+#a function which accepts another function, enhance it 
+#with a wrapper function and return enhanced function back
+
+#define the decorator, which accepts another function as the argument
+def myDecorator(myFunc):
+  def myInnerWrapper(): #wrapper fn "decorates" the function received
+    print("Just before the received function call")
+    myFunc()
+    print("Just after the received function call")
+  return myInnerWrapper
+
+#defining a simple fn to pass into the behavior
+
+def myFnToPassIntoDecorator():
+  print("A simple function to pass into decorator")
+
+#calling the decorator
+myDecoratorDemo = myDecorator(myFnToPassIntoDecorator)
+#execute the decorator 
+myDecoratorDemo()
+
+#defining another simple function to pass into decorator
+@myDecorator
+def newmyFnToPassIntoDecorator():
+  print("A simple function to pass into decorator")
+
+newmyFnToPassIntoDecorator()
 """
 
+#Define a simple class witha constructor that can accept two variables
+class Employee:
+  #defining a global variable (data member)
+  empCount = 0
+
+  #defining a constructor
+  #that can accept two values, name and salary
+  #save those values into self (self is an instance of the class)
+  def __init__(self, name, salary):
+    self.name = name
+    self.salary = salary
+    Employee.empCount += 1 #increment the emp count when a new object is created
+
+  #define a simple member function
+  def displayEmpCount(self):
+    print("Total no of employees:",Employee.empCount)
+  #define another simple member function
+  def displayEmployeeDetails(self):
+    print("Name:",self.name)
+    print("Salary:",self.salary)
+
+#create an object of employee class
+employee1 = Employee("Tom",2000)
+#calling the function using the object
+employee1.displayEmpCount()
+employee1.displayEmployeeDetails()
+
+#create an object of employee class
+employee2 = Employee("Jerry",3000)
+#calling the function using the object
+employee2.displayEmpCount()
+employee2.displayEmployeeDetails()
+
+#accessing the variable directly from the class 
+print("Total employee count:", Employee.empCount)
 
 
 
 
-def calculateGstShare(price, rate):
-    return price * (rate / 2) / 100
-def printGstDetails():
-    SGST = CGST = calculateGstShare(price, rate)
-    print("Actual price of the item :", price)
-    print("Price after applying CGST :", CGST)
-    print("Price after applying SGST :", SGST)
-    print("Total price with GST :", price + CGST + SGST)
-price = float(input("Price before GST : "))
-rate = float(input("GST rate : "))
 
-printGstDetails()
+
+
+
 
 
 
