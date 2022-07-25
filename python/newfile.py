@@ -875,7 +875,7 @@ def newmyFnToPassIntoDecorator():
   print("A simple function to pass into decorator")
 
 newmyFnToPassIntoDecorator()
-"""
+
 
 #Define a simple class witha constructor that can accept two variables
 class Employee:
@@ -914,12 +914,445 @@ employee2.displayEmployeeDetails()
 print("Total employee count:", Employee.empCount)
 
 
+#demonstarting class inheritance
+#defining the base class
+class Rocket:
+  #defining the constructor
+  def __init__(self,name,distance):
+    self.name = name
+    self.distance = distance
+    self.__myPrivateVar = ""
+  #defining a member function which returns a string
+  def launch(self):
+    return "%s has reached %s" %(self.name, self.distance)
+
+#Defining a derived class
+class MarsRover(Rocket): #inherit from the base class
+  def __init__(self, name, distance, maker, vehicleCode):
+    Rocket.__init__(self, name, distance) #calling the base class constructor
+    self.maker = maker
+    self.__vehicleCode = vehicleCode #define a private variable using double underscores
+
+  def printMaker(self):
+    return "%s launched by %s"%(self.name, self.maker)
+  
+  def getVehicleCode(self):
+    return self.__vehicleCode
+
+class plutoRover(MarsRover):
+  def getVehicleCode(self):
+    return super().getVehicleCode()
+
+#create object (instance) for main class Rocket
+x = Rocket("Small rocket","till stratosphere")
+y = MarsRover("Mars rover","till mars","ISRO","12345")
+z = plutoRover()
+print(z.getVehicleCode)
+
+print(x.launch())
+print(y.launch())
+print(y.printMaker())
+#due to encapsulation, we cannot access a private variable directly
+print(y.__vehicleCode())
+#this is the proper way of accessing a member variable
+print(y.getVehicleCode())
+
+#typically when using a decorator, it will return the name,doctsring etc
+#of the wrapper function.
+#to change this behavior and get the actual passed function's name and doc
+
+#define the decorator, which accepts another function as the argument
+#inside the decorator using another decorator 'wraps' before the wrapper function
+import functools
+
+def acceptDecorator(myString3):
+  def myDecorator(myFunc):
+    @functools.wraps(myFunc)
+    def myInnerWrapper(*args): #wrapper fn "decorates" the function received
+      print("Just before the received function call "+myString3)
+      value = myFunc(*args)
+      print("Just after the received function call")
+      return value
+    return myInnerWrapper
+  return myDecorator
+
+
+#defining another simple function to pass into decorator
+@acceptDecorator("testing string into decorator")
+def newmyFnToPassIntoDecorator(myString,myString2):
+  Sample doc string for our newmyFnToPassIntoDecorator()function
+  returnString = ("A simple function to pass into decorator "+ myString + myString2)
+  return returnString
+
+returnedString = newmyFnToPassIntoDecorator("just some test string"," next string")
+print(returnedString)
+
+
+#demonstrating class separating methods in python
+#defining the main class
+
+from cgi import print_exception
+
+
+class Hero:
+  #define the decorator @classmethod
+  @classmethod
+  def say_class_hello(cls): #since its class method, recieve as reference as implicit firdt argument
+    if(cls.__name__ =="HeroSon"):
+      print("Hi Prince, called from HerSon")
+    elif(cls.__name__=="HerDaughter"):
+      print("Hi Princess, called from HerDaughter")
+
+  #define the decorator @staticmethod
+  @staticmethod
+  def say_hello():
+    print("Hello...")
+  
+class HeroSon(Hero):
+  def say_son_hello(self): #first implicit arg will be self since its a regular method
+    print("Hello son from sub class HeroSon")
+
+class HeroDaughter(Hero):
+  def say_son_hello(self): #first implicit arg will be self since its a regular method
+    print("Hello daughter from sub class HeroDaughter")
+
+testHeroSon = HeroSon()
+testHeroSon.say_class_hello()
+testHeroSon.say_hello()
+
+testHeroDaughter = HeroDaughter()  
+testHeroDaughter.say_class_hello()
+testHeroDaughter.say_hello()
 
 
 
 
+#demonstrating class decorating mathod in python
+#defining the main class
+class Hero:
+  #define the decorator @classmethod
+  @classmethod
+  def say_class_hello(cls): #since its classmethod, will receive class 
+    if(cls.__name__=="HeroSon"):
+      print("Hi Prince, calling from HeroSon")
+    elif(cls.__name__=="HeroDaughter"):
+      print("Hi Princess, calling from HeroDaughter")
+
+  @staticmethod
+  def say_hello():
+    print("hello..")
+class HeroSon(Hero):
+  def say_son_hello(self):
+    print("hello son from sub class HeroSon")
+
+class HeroDaughter(Hero):
+  def say_son_hello(self):
+    print("hello daughter from sub class HeroDaughter")
+
+testHeroSon = HeroSon()
+testHeroSon.say_class_hello()
+testHeroSon.say_hello()
+
+testHeroDaughter = HeroDaughter()
+testHeroDaughter.say_class_hello()
+testHeroDaughter.say_hello()
 
 
+
+class House:
+  #constructor
+    def __init__(self,price):
+      self.__price = price #keeping price as private __price
+
+  #creating the getter method with the property decorator
+    @property
+    def price(self):
+      return self.__price
+    
+    #creating a setter method decorator, for fetching the attribute value in a class
+    @price.setter
+    def price(self, new_price):
+      self.__price = new_price
+
+    @price.deleter
+    def price(self):
+      del self.__price
+
+
+#typical access and update will be like this:
+house = House(500000) #create obj
+print(house.price) #access attributes
+house.price = 1000000 #modifying the attributes
+print(house.price) #access attributes
+del house.price #delete price of the house instance
+print(house.price) #access attributes
+
+#file handling demo using python
+#trying to open a file myfile.txt in the same dir
+myFile = open("myfile.txt","r")
+#to read contents use read 
+#print(myFile.read(10))
+print(myFile.readline())
+print(myFile.readline())
+print(myFile.readline())
+
+
+
+
+#a simple example for higher order function
+#which can accept atleast one fn and can optionally return a fn
+
+#a simple fn with a print statement
+from tkinter import Y
+
+
+def greet(name):
+  return "Hello {}".format(name)
+
+#defining the higher order fn which can accept fn
+def print_greetings(fn,param):
+  print(fn(param))
+
+#calling the higher order fn
+print_greetings(greet,"Roshni")
+
+#map() function - a higher order fn which can accept a function and also
+#a list of iterable parameters. Each param will be applied to the function 
+#and result will be returned back as a map object.
+#we can later convert this map object into a set/tuple.
+
+#defining a simple function
+def mymapfunction(a):
+  return a*a
+
+#calling the map function, passing the function as well as the iterables
+x = map(mymapfunction, (1,2,3,4))
+#x is a map object , need to convert that into a set/tuple
+print(tuple(x))
+
+# passing a lambda function as well as the iterables
+x = map(lambda x: x*x, (1,2,3,4))
+#x is a map object , need to convert that into a set/tuple
+print(tuple(x))
+
+
+#filter function which filters the iterables based on condition
+#it accepts the fn and also the iterables as parameters
+
+#defining a filter condition function
+def filterfunc(x):
+  if x>=3:
+    return x
+
+#calling the filter fn passing the condition fn and iterables
+y = filter(filterfunc, (1,2,3,4))
+#converting the returned filter obj into tuple/list/set etc
+print(list(y))
+
+#calling the filter fn passing the lambda fn and iterables
+y = filter(lambda x: (x>=3), (1,2,3,4))
+#converting the returned filter obj into tuple/list/set etc
+print(list(y))
+
+
+#reduce fn to reduce the list of values based on the operation we give
+#it will accept the fn (preferaable lambda) fn and  the iterables
+from functools import reduce
+x = reduce(lambda a,b: a+b, [23,21,45,98])
+print(x)
+
+#class and regular unction without abstract classs
+class Lion:
+  def give_food(self):
+    print("Feeding a lion with raw meat.")
+
+class Panda:
+  def feed_animal(self):
+    print("Feeding a panda with bamboo.")
+
+class Snake:
+  def feed_snake(self):
+    print("Feeding a snake with mice.")
+
+#creating objects for animals we plan to feed:
+simba = Lion()
+kungfupanda = Panda()
+kingcobra = Snake()
+
+#calling the feeding fun for each of them
+simba.give_food()
+kungfupanda.feed_animal()
+kingcobra.feed_snake()
+
+
+from abc import ABC, abstractmethod
+#ABC is Abstract Base Class
+# from abc module, we have to import ABC and decorator abstractmethod
+
+class Animal(ABC): #inherit from ABC
+    @abstractmethod
+    def feed(self):
+      pass  #pass statement is a placeholder for future code
+    
+    #define a diet property using property decorator
+    #and abstract method
+    @property
+    @abstractmethod
+    def diet(self): #define diet ppty
+      pass
+
+    @property
+    def food_eaten(self):
+      #define food_eaten ppty
+      #food_eaten ppty's getter
+      return self.__food
+      
+    #having the setter for food_eaten
+    @food_eaten.setter
+    def food_eaten(self, food):
+      if food in self.diet:
+        self.__food = food
+      else:
+        raise ValueError(f"This animal does not eat this.")
+
+    @abstractmethod
+    def do(self,action):
+      pass
+  
+  
+#class and regular unction without abstract classs
+class Lion(Animal):
+  @property
+  def diet(self):
+    return ["antelope","chettah", "buffalo"]
+  def feed(self): #must implement feed because its abs method
+    print(f"Feeding a lion with {self.food_eaten}.")
+  def do(self,action,time):
+    print(f"{action} a lion with raw meat at {time}.")
+
+
+class Panda(Animal):
+  @property
+  def diet(self):
+    return ["bamboo","leaves"]
+  def feed(self):
+    print(f"Feeding a panda with {self.food_eaten}.")
+  def do(self,action,time):
+    print(f"{action} a panda with bamboo at {time}.")
+
+
+class Snake(Animal):
+  @property
+  def diet(self):
+    return ["mice","rabbit"]
+  def feed(self):
+    print(f"Feeding a snake with {self.food_eaten}.")
+  def do(self,action,time):
+    print(f"{action} a snake with mice at {time}.")
+
+
+#creating objects for animals we plan to feed:
+simba = Lion()
+simba.food_eaten = "buffalo"
+simba.feed()
+
+kungfupanda = Panda()
+kungfupanda.food_eaten = "bamboo"
+kungfupanda.feed()
+
+kingcobra = Snake()
+kingcobra.food_eaten = "mice"
+kingcobra.feed()
+
+#file handling demo using python
+#trying to open a file myfile.txt in the same dir
+myFile = open("myfile.txt","r")
+#to read contents use read 
+#print(myFile.read(10))
+#print(myFile.readline())
+#print(myFile.readline())
+#print(myFile.readline())
+
+#reading the contents of thr file line by line using for loop
+for line in myFile:
+  print(line)
+
+#we need to close the file cursor/obj once we completed 
+#the operation associated with it.
+myFile.close()
+
+myFile = open("myfile.txt","r")
+#read all the lines and return it as list
+myFileContentsList = myFile.readlines()
+print(myFileContentsList)
+myFile.close()
+
+#opening file cursor in append mode
+myFile = open("myfile.txt","a")
+#write() method is used to write text/data to the file
+myFile.write("Humpty Dumpty sat on a wall\n")
+myFile.close()
+
+#opening file cursor in write mode
+myFile = open("myfile.txt","w")
+#write() method is used to write text/data to the file
+myFile.write("Humpty Dumpty sat on a wall\n")
+myFile.close()
+
+myFile = open("myfile.txt","r")
+print("The file pointer is now at ",myFile.tell())
+#read all the lines and return it as list
+#myFileContentsList = myFile.readlines()
+#print("the file pointer is now at ",myFile.tell())
+#print(myFileContentsList)
+#print(myFile.readline())
+#change the file pointer offset using seek()
+myFile.seek(30)
+print("The file pointer is now at ",myFile.tell())
+myFileContentsList = myFile.readlines()
+print("The file pointer is now at ",myFile.tell())
+print(myFileContentsList)
+myFile.close()
+
+#renameing a file using python os module 
+import os
+if os.path.exists("myfilenew.txt"):
+  os.rename("myfilenew.txt","myfile.txt")
+  print("rename success")
+else:
+  print("This file does not exist")
+
+
+if os.path.exists("myfilenew.txt"):
+  os.remove("myfile.txt")
+  print("renmove success")
+else:
+  print("This file does not exist")
+
+
+import os
+#create a new dictionary
+#os.mkdir("mydir")
+#print the current working directory
+print(os.getcwd())
+#change the current working directory
+os.chdir("mydir")
+print(os.getcwd())
+#delete the directory that we created
+#os.rmdir("mydir")
+#to go back to previous directory
+#os.chdir("..")
+print(os.getcwd())
+#delete the directory that we created
+#os.rmdir("mydir")
+#os.mkdir("mydir")
+#get the list of files and folders in a dir
+result = os.listdir(os.getcwd())
+print(result)
+
+"""
+#run an external python file (fileoutputsave.py)
+#save its results as txt file
 
 
 
