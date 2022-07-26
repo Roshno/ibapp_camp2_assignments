@@ -1350,20 +1350,115 @@ print(os.getcwd())
 result = os.listdir(os.getcwd())
 print(result)
 
+
+#A simple demostration of exception handling in python
+#using the try, except, finally blocks (clause)
+
+try:
+  div = 4//2
+  print(div)
+
+except ZeroDivisionError as e:
+  print("You are trying to divide a number by 0.")
+  print(f"{type(e).__name__} was occured. More details below: ")
+  print(e) #print entire details of the exception
+
+else: #else will work if the try statements are successful
+  print("division completed and result is",div)
+finally:
+  print("I will run whatever happens.")
+
+#Nested try exceot statements in python: a scenario
+try: 
+  f=open("myfile.txt")
+  try:
+    f.write("Hello World")
+  except:
+    print("Some write error occured.")
+  finally:
+    f.close()
+except:
+  print("The file cannot be opened.")
+
+#importing pyodbc module
+from cmath import e
+from tkinter import E
+import pyodbc
+
+#create a connection string
+myConString = 'Driver={SQL Server};Server=DESKTOP-D2MSN9I\SQLEXPRESS;Database=employee_db;Trusted_Connection=yes;'
+#create a connection with connection string
+myconn = pyodbc.connect(myConString)
+try:
+
+#get the cursor object
+  mycursor = myconn.cursor()
+
+#using cursor, execute SQL commands
+  mycursor.execute('CREATE TABLE EmployeeMaster3'
+'(Id INT IDENTITY PRIMARY KEY,'
+	'EmployeeCode VARCHAR(10),'
+	'EmployeeName VARCHAR(25),'
+	'DepartmentCode VARCHAR(10),'
+	'LocationCode VARCHAR(10),'
+	'Salary INT)')
+except Exception as e:
+  print("Cannot create the table because :")
+  print(f"{type(e).__name__} has occured.")
+  print(e)
+
+myconn.commit()
+myconn.close()
+
+import pyodbc
+#create a connection string
+myConString = 'Driver={SQL Server};Server=DESKTOP-D2MSN9I\SQLEXPRESS;Database=employee_db;Trusted_Connection=yes;'
+#create a connection with connection string
+myconn = pyodbc.connect(myConString)
+mycursor = myconn.cursor()
+try:
+
+#get the cursor object
+  mycursor = myconn.cursor()
+
+#using cursor, execute SQL commands
+  mycursor.execute('SELECT * FROM EmployeeMaster')
+except Exception as e:
+  print("Cannot read the table :")
+  print(e)
+
+
+'''for row in mycursor.fetchall():
+  print(row)'''
+
+employees = [{'empcode':row[1],'empname':row[2]} for row in mycursor.fetchall()]
+print(employees)
+
+myconn.close()
+
 """
-#run an external python file (fileoutputsave.py)
-#save its results as txt file
+import pyodbc
+#create a connection string
+myConString = 'Driver={SQL Server};Server=DESKTOP-D2MSN9I\SQLEXPRESS;Database=employee_db;Trusted_Connection=yes;'
+#create a connection with connection string
+myconn = pyodbc.connect(myConString)
+mycursor = myconn.cursor()
+try:
 
+#get the cursor object
+  mycursor = myconn.cursor()
 
+#using cursor, execute SQL commands
+  #mycursor.execute("INSERT INTO EmployeeMaster VALUES ('E0888', 'Arjun', 'IT', 'TVM', 4000)")
+  #mycursor.execute('SELECT * FROM EmployeeMaster')
+  mycursor.execute("INSERT INTO EmployeeMaster VALUES (?,?,?,?,?)",('E0899', 'Arjuna', 'IT', 'TVM', 9000))
+except Exception as e:
+  print("Cannot read the table :")
+  print(e)
 
+for row in mycursor.fetchall():
+  print(row)
 
-
-
-
-
-
-
-
-
-
+myconn.commit()
+myconn.close()
 

@@ -42,30 +42,30 @@ class CalcQuo(calculator):
 
 option = 0
 while option != 5:
-    print("Calculator:\n1.Add\n 2.Subtract\n 3.Product\n 4.Division\n 5. Exit")
-    option = int(input("enter your option"))
+    print("Calculator:\n 1.Add \n 2.Subtract \n 3.Product \n 4.Division \n 5.Exit")
+    option = int(input("enter your option: "))
     if option == 1:
         sum = CalcSum()
-        sum.num1 = int(input("Enter a number"))
-        sum.num2 = int(input("Enter a number"))
+        sum.num1 = int(input("Enter a number: "))
+        sum.num2 = int(input("Enter a number: "))
         print(sum.calculate())
 
     elif option == 2:
         sub = CalcDiff()
-        sub.num1 = int(input("Enter a number"))
-        sub.num2 = int(input("Enter a number"))
+        sub.num1 = int(input("Enter a number: "))
+        sub.num2 = int(input("Enter a number: "))
         print(sub.calculate())
 
     elif option == 3:
         prod = CalcProd()
-        prod.num1 = int(input("Enter a number"))
-        prod.num2 = int(input("Enter a number"))
+        prod.num1 = int(input("Enter a number: "))
+        prod.num2 = int(input("Enter a number: "))
         print(prod.calculate())
 
     elif option == 4:
         quo = CalcQuo()
-        quo.num1 = int(input("Enter a number"))
-        quo.num2 = int(input("Enter a number"))
+        quo.num1 = int(input("Enter a number: "))
+        quo.num2 = int(input("Enter a number: "))
         print(quo.calculate())
 
     elif option == 5:
