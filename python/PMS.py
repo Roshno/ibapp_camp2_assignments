@@ -81,6 +81,40 @@ def sort():
                 print(f'Patient ID: {phone}\n')
         print(f'{len(Patients)} contacts')
 
+def update():
+    while(True):
+        name = input('Enter name: ')
+        if ',' in name:
+            print(', not allowed in name')
+        else:
+            break
+    try:          
+        myCursor.execute("SELECT * FROM Patient_details WHERE patientName = ?",(name))
+        cursorn = myCursor.fetchall()
+        print(cursorn)
+    except Exception:
+        print("error")
+
+    else: 
+        myCursor.execute('DELETE FROM Patient_details WHERE patientName = ?',(name))
+        while(True):
+            name = input('Enter name: ').strip()
+            patientID=int(input('enter patient id:'))
+            gender = input('Enter gender of patient: ')
+            age = int(input("Enter age of patient: "))
+            bloodGroup = input('Enter blood group: ').strip()
+            break
+    try:
+
+        myCursor.execute('INSERT INTO Patient_details VALUES (?,?,?,?,?);',(patientID, name, gender, age, bloodGroup)
+        )
+        
+        myconn.commit()
+    except:
+        print('Failed to update patient')
+    else:
+        print('Patient added')
+
 
 
 while(True):
