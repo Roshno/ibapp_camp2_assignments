@@ -114,7 +114,7 @@ def update():
     except:
         print('Failed to update patient')
     else:
-        print('Patient added')
+        print('Patient details updated')
 
 
 while(True):

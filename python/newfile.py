@@ -1594,7 +1594,7 @@ rand_obj_a = RandomNumbers(3,5)
 rand_obj_b = RandomNumbers(6,8)
 
 print(rand_obj_a + rand_obj_b)
- """
+
  #demonstarting the class dunder methods
  #creating a class with an empty list of software names
  #and an empy dict of software name and version as key value pair
@@ -1695,6 +1695,101 @@ if 'ps' in sw1:
   print("Software exists")
 else:
   print("Software does not exist")
+
+
+ #create a copy of a list with some processing/condition checks
+ #w/o implementing the comprehension just used for a loop
+words = ["hello","world","how","are","you"]
+newlist=[] #want a new list with all the words containing o
+
+for word in words:
+  if 'o' in word:
+    newlist.append(word)
+
+print(newlist)
+
+#use list comprehension for the same task
+#syntax : [expression for item in iterable if condition == True]
+
+words = ["hello","world","how","are","you"]
+newlist =[word for word in words if "o" in word]
+print(newlist)
+
+#using comprehension generate list of 20 integers
+numlist = [x for x in range(20)]
+print(numlist)
+
+
+numlist = [x for x in range(20) if x < 15] 
+print(numlist)
+
+#using expression to change all the items to uppercase
+words = ["hello","world","how","are","you"]
+newlist =[word.upper() for word in words if "o" in word]
+print(newlist)
+
+
+#generate a new list with item 'hello' for all the items
+newlist = ['hello' for word in words]
+print(newlist)
+
+newlist = [word if word != "hello" else "hi" for word in words]
+print(newlist)
+
+
+#working with CSV files using python
+#using 
+import csv  #import csv module/lib
+#opening the csv file
+file = open("mycsvfile.csv")
+#using csv.reader to read the file obj
+csvreader = csv.reader(file)
+ 
+ #declaring emoty header and rows list
+header = []
+rows = []
+
+#using the next() method to read the current line and stop at the start
+header = next(csvreader)
+print(header)
+
+for row in csvreader:
+  rows.append(row)
+print(rows)
+
+#close the file handler
+file.close()
+
+
+ #trying to read the csv file
+from codecs import charmap_build
+import csv
+
+
+with open('mycsvfile.csv') as file:
+  content = file.readlines()
+
+#using strip to strip the unwanted char
+#using the list omprehension
+content = [i.strip() for i in content]
+
+#header will be the first index value
+header = content[:1]
+#rows will be from index 1 onwards
+rows = content[1:]
+print(header)
+print(rows)
+
+#performing write to the csv file
+header = ['Names','Experience','Salary']
+data = [['Anu',9,40000],['Vinu',8,30000],['Manu',5,25000]]
+
+with open('mycsvfile.csv','w',newline="") as file:
+  csvwriter = csv.writer(file) #creating csv write object
+  csvwriter.writerow(header) #write header
+  csvwriter.writerows(data) #write row contents
+
+ """
 
 
 
